@@ -44,7 +44,7 @@ class _RegisterScreenState extends State<RegisterScreen>
   // ── Parent: first child ───────────────────────────────────────────────
   final _childNameCtrl = TextEditingController();
   DateTime? _childDob;
-  String _childGender = 'Not specified';
+  String _childGender = 'male';
   final _childAllergyCtrl = TextEditingController();
   final _childMedCtrl = TextEditingController();
   final _classroomCodeCtrl = TextEditingController(); // optional classroom code
@@ -416,7 +416,13 @@ class _RegisterScreenState extends State<RegisterScreen>
           onPickDob: _pickDob,
           onGenderChange: (v) => setState(() => _childGender = v!),
           onSubmit: () {
-            if (_step2Key.currentState!.validate()) _submit();
+            if (_step2Key.currentState!.validate()) {
+              if (_childDob == null) {
+                _showError('Please select your child\'s date of birth.');
+                return;
+              }
+              _submit();
+            }
           },
         );
       default:
@@ -1442,12 +1448,14 @@ class _ChildInfoStep extends StatelessWidget {
                           .copyWith(color: cs.onSurface),
                       items: const [
                         DropdownMenuItem(
-                            value: 'Not specified',
+                            value: 'male',
+                            child: Text('Male')),
+                        DropdownMenuItem(
+                            value: 'female',
+                            child: Text('Female')),
+                        DropdownMenuItem(
+                            value: 'other',
                             child: Text('Prefer not to say')),
-                        DropdownMenuItem(
-                            value: 'Male', child: Text('Male')),
-                        DropdownMenuItem(
-                            value: 'Female', child: Text('Female')),
                       ],
                       onChanged: onGenderChange,
                     ),
