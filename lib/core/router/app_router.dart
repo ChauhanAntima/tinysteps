@@ -16,7 +16,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       final isLoggedIn = session != null;
       final isOnAuth =
           state.matchedLocation == '/login' ||
-              state.matchedLocation == '/register';
+          state.matchedLocation == '/register';
 
       if (!isLoggedIn && !isOnAuth) return '/login';
       if (isLoggedIn && isOnAuth) {
