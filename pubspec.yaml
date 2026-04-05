@@ -1,7 +1,7 @@
 name: tinysteps
 description: "TinySteps — Smart DayCare Management App for children aged 0-5 years."
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.6.0
 
 environment:
   sdk: ^3.11.0
